@@ -1,60 +1,74 @@
+/* src/App.css */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
   margin: 0;
   padding: 0;
+  background-color: #f4f4f4;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 20px;
 }
 
-h1 {
-  color: #333;
+.header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
 }
 
-ul {
+.header h1 {
+  margin: 0;
+}
+
+.list-view {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.list-view h2 {
+  margin-top: 0;
+}
+
+.list-view ul {
   list-style-type: none;
   padding: 0;
 }
 
-li {
+.list-view li {
   margin-bottom: 10px;
 }
 
-a {
+.list-view li a {
   text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.list-view li a:hover {
   color: #007bff;
 }
 
-a:hover {
-  text-decoration: underline;
+.detail-view {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 20px;
 }
 
-input[type="text"] {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 10px;
+.detail-view h2 {
+  margin-top: 0;
 }
 
-button {
-  padding: 8px 12px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.search-bar {
+  margin-top: 20px;
 }
 
-button:hover {
-  background-color: #0056b3;
-}
-
-select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.filters {
+  margin-top: 20px;
 }

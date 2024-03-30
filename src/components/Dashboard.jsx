@@ -1,41 +1,35 @@
+// src/components/Dashboard.jsx
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import ListView from './ListView';
+import SearchBar from './SearchBar';
+import Filters from './Filters';
 
-const Dashboard = () => {
-    const [weatherData, setWeatherData] = useState([]);
+function Dashboard() {
+  // State for fetched data
+  const [data, setData] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            // Fetch weather data from API
-            const response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?key=b4b73220631b49c0a6f79e4298e75e68`);
-            const data = await response.json();
-            setWeatherData(data);
-        };
+  // Fetch data using useEffect
+  useEffect(() => {
+    const fetchData = async () => {
+      // Fetch data from API
+      // Use your API fetching logic here
+      // For demo purposes, let's assume fetchedData is an array of objects
+      const fetchedData = await fetch('https://api.weatherbit.io/v2.0/current?key=b4b73220631b49c0a6f79e4298e75e68');
+      const jsonData = await fetchedData.json();
+      setData(jsonData);
+    };
 
-        fetchData();
-    }, []);
+    fetchData();
+  }, []);
 
-    return (
-        <div>
-            <h1>Weather Dashboard</h1>
-            <LineChart width={600} height={300} data={weatherData}>
-                <Line type="monotone" dataKey="temperature" stroke="#8884d8" />
-                <CartesianGrid stroke="#ccc" />
-                <XAxis dataKey="date" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-            </LineChart>
-            <ul>
-                {weatherData.map((item, index) => (
-                    <li key={index}>
-                        <Link to={`/detail/${item.id}`}>{item.date}</Link>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
-};
+  return (
+    <div>
+      <h1>Weather Dashboard</h1>
+      <SearchBar data={data} setData={setData} />
+      <Filters />
+      <ListView data={data} />
+    </div>
+  );
+}
 
 export default Dashboard;

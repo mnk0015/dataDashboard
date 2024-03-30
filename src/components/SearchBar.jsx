@@ -1,18 +1,28 @@
+// src/components/SearchBar.jsx
 import React, { useState } from 'react';
 
-const SearchBar = ({ onSearch }) => {
-    const [query, setQuery] = useState('');
+function SearchBar({ data, setData }) {
+  const [searchTerm, setSearchTerm] = useState('');
 
-    const handleSearch = () => {
-        onSearch(query);
-    };
+  const handleSearch = (e) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+    // Filter data based on search term
+    const filteredData = data.filter(item => item.name.toLowerCase().includes(term.toLowerCase()));
+    setData(filteredData);
+  };
 
-    return (
-        <div>
-            <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
-            <button onClick={handleSearch}>Search</button>
-        </div>
-    );
-};
+  return (
+    <div>
+      <h3>Search Bar</h3>
+      <input
+        type="text"
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={handleSearch}
+      />
+    </div>
+  );
+}
 
 export default SearchBar;

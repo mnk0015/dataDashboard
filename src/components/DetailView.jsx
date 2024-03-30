@@ -1,35 +1,40 @@
+// src/components/DetailView.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-const DetailView = () => {
-    const { id } = useParams();
-    const [weatherDetail, setWeatherDetail] = useState(null);
+function DetailView() {
+  const { id } = useParams();
+  const [detailData, setDetailData] = useState(null);
 
-    useEffect(() => {
-        const fetchDetail = async () => {
-            // Fetch detail data using id
-            const response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily/${id}?key=b4b73220631b49c0a6f79e4298e75e68`);
-            const data = await response.json();
-            setWeatherDetail(data);
-        };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch detailed data based on the ID
+        const response = await fetch(`https://api.weatherbit.io/v2.0/current?city_id=${id}&key=b4b73220631b49c0a6f79e4298e75e68`);
+        const jsonData = await response.json();
+        setDetailData(jsonData.data[0]); // Assuming the API response is an object with a 'data' property containing an array
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-        fetchDetail();
-    }, [id]);
+    fetchData();
+  }, [id]); // Fetch data when the ID changes
 
-    return (
+  return (
+    <div>
+      <h2>Detail View</h2>
+      {detailData ? (
         <div>
-            <h1>Weather Detail View</h1>
-            {weatherDetail && (
-                <div>
-                    <h2>{weatherDetail.date}</h2>
-                    <p>Temperature: {weatherDetail.temperature}</p>
-                    <p>Humidity: {weatherDetail.humidity}</p>
-                    <p>Wind Speed: {weatherDetail.wind_speed}</p>
-                    {/* Add more details as needed */}
-                </div>
-            )}
+          <p>City: {detailData.city_name}</p>
+          <p>Temperature: {detailData.temp}</p>
+          {/* Add more details as needed */}
         </div>
-    );
-};
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
+}
 
 export default DetailView;
