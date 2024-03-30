@@ -35,7 +35,7 @@ GIF created with [ScreenToGif](https://www.screentogif.com/) for Windows
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Currently under maintenance due to issue with webapp visibility.
 
 ## License
 
