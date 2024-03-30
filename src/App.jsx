@@ -1,30 +1,41 @@
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Dashboard from './components/Dashboard';
+import ListView from './components/ListView';
+import DetailView from './components/DetailView';
+import SearchBar from './components/SearchBar';
+import Filters from './components/Filters';
+import './App.css';
 
-// src/App.jsx
-import React, { useEffect, useState } from 'react';
-
-function App() {
-  const [weatherData, setWeatherData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?key=b4b73220631b49c0a6f79e4298e75e68`);
-        const data = await response.json();
-        setWeatherData(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+const App = () => {
+    const handleSearch = (query) => {
+        // Implement search functionality
     };
 
-    fetchData();
-  }, []);
+    const handleFilter = (filter) => {
+        // Implement filter functionality
+    };
 
-  return (
-    <div className="App">
-      {/* Your components will go here */}
-    </div>
-  );
-}
+    return (
+        <Router>
+            <div className="container">
+                <h1>Weather App</h1>
+                <SearchBar onSearch={handleSearch} />
+                <Filters onFilter={handleFilter} />
+                <Switch>
+                    <Route exact path="/">
+                        <Dashboard />
+                    </Route>
+                    <Route exact path="/list">
+                        <ListView />
+                    </Route>
+                    <Route path="/detail/:id">
+                        <DetailView />
+                    </Route>
+                </Switch>
+            </div>
+        </Router>
+    );
+};
 
 export default App;
